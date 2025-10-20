@@ -1,43 +1,43 @@
---°¡¿­±³¹İ±â ¼­¹ö ½ºÅ©¸³Æ®
+--ê°€ì—´êµë°˜ê¸° ì„œë²„ ìŠ¤í¬ë¦½íŠ¸
 
---µ¥ÀÌÅ¸¸Ş´ÏÀú ¸ğµâ ºí·¯¿À´Â ÄÚµå
+--ë°ì´íƒ€ë©”ë‹ˆì € ëª¨ë“ˆ ë¸”ëŸ¬ì˜¤ëŠ” ì½”ë“œ
 local DataManagerModule = require(game.ServerScriptService.DataManager)
 
---°¡¿­±³¹İ±â ºñÄ¿ ÆÄÆ® º¯¼ö
+--ê°€ì—´êµë°˜ê¸° ë¹„ì»¤ íŒŒíŠ¸ ë³€ìˆ˜
 local Beaker = script.Parent.Parent.Beaker
 local BottomBeaker = script.Parent.Parent.Beaker.BottomCylinder
 local TopBeaker = script.Parent.Parent.Beaker.TopCylinder
 local SpinBeaker = script.Parent.Parent.Beaker.SpinCylinder
 
---°¡¿­±³¹İ±â ¹öÆ° º¯¼ö
+--ê°€ì—´êµë°˜ê¸° ë²„íŠ¼ ë³€ìˆ˜
 local TempButton = script.Parent.TempButton.ClickDetector
 local SpeedButton = script.Parent.SpeedButton.ClickDetector
 local LiquidDestory = script.Parent.LiquidDestory.ClickDetector
 local TempSwitch = script.Parent.TempSwitch
 local SpeedSwitch = script.Parent.SpeedSwitch
 
---°¡¿­±³¹İ±âÀÇ ÇöÀç ¿Âµµ, ¼Óµµ °ª¿¡ ´ëÇÑ º¯¼ö
+--ê°€ì—´êµë°˜ê¸°ì˜ í˜„ì¬ ì˜¨ë„, ì†ë„ ê°’ì— ëŒ€í•œ ë³€ìˆ˜
 local TempValue = script.Parent.Parent.TempValue
 local SpeedValue = script.Parent.Parent.SpeedValue
 
---ÀÌ¸§, ½Ã°£ Ç¥½Ã ÆÄÆ® º¯¼ö
+--ì´ë¦„, ì‹œê°„ í‘œì‹œ íŒŒíŠ¸ ë³€ìˆ˜
 local NameSIGN = script.Parent.NameSIGN.SurfaceGui.SIGN
 local TimeSIGN = script.Parent.TimeSIGN.SurfaceGui.SIGN
 
---°¡¿­±³¹İ±â »óÈ£ÀÛ¿ë ¿ÀºêÁ§Æ®(ProximityPrompt) º¯¼ö (°¡¿­±³¹İ±â¸¦ È°¼ºÈ­ ½ÃÅ°°Å³ª È­ÇĞ¹°À» ³ÖÀ» ¶§ »óÈ£ÀÛ¿ë ÇÏ´Â ¿ëµµ)
+--ê°€ì—´êµë°˜ê¸° ìƒí˜¸ì‘ìš© ì˜¤ë¸Œì íŠ¸(ProximityPrompt) ë³€ìˆ˜ (ê°€ì—´êµë°˜ê¸°ë¥¼ í™œì„±í™” ì‹œí‚¤ê±°ë‚˜ í™”í•™ë¬¼ì„ ë„£ì„ ë•Œ ìƒí˜¸ì‘ìš© í•˜ëŠ” ìš©ë„)
 local Prox = script.Parent.Proximity.ProximityPrompt
 
---°¡¿­±³¹İ±â °ü·Ã ¸®¸ğÆ® º¯¼ö
+--ê°€ì—´êµë°˜ê¸° ê´€ë ¨ ë¦¬ëª¨íŠ¸ ë³€ìˆ˜
 local ReactionFormulaRemote = game.ReplicatedStorage.Research.ReactionFormulaRemote
 local ReactionFormulaCheck = game.ReplicatedStorage.Research.ReactionFormulaCheck
 local ReactionFormulaStop = game.ReplicatedStorage.Research.ReactionFormulaStop
 
---°¡¿­±³¹İ±â ¼Ò¸® ¿ÀºêÁ§Æ® º¯¼ö
+--ê°€ì—´êµë°˜ê¸° ì†Œë¦¬ ì˜¤ë¸Œì íŠ¸ ë³€ìˆ˜
 local HeatingStirrerSound = script.Parent.LiquidDestory.HeatingStirrerSound
 local ButtonClick = script.Parent.LiquidDestory.ButtonClick
 local LiquidSound = script.Parent.LiquidDestory.LiquidSound
 
---ÀÓ½Ã·Î ¾²ÀÌ´Â ·£´ı °ü·Ã º¯¼öµé
+--ì„ì‹œë¡œ ì“°ì´ëŠ” ëœë¤ ê´€ë ¨ ë³€ìˆ˜ë“¤
 local TimeTimeValue
 local NaemNameValue
 local OneValue
@@ -47,45 +47,45 @@ local TwoColor
 local TempTempValue
 local SpeedSpeedValue
 
---È­ÇĞ¹°ÀÌ ¾î´ÀÁ¤µµ Ã¡´ÂÁö ¾Ë·ÁÁÖ´Â º¯¼ö
+--í™”í•™ë¬¼ì´ ì–´ëŠì •ë„ ì°¼ëŠ”ì§€ ì•Œë ¤ì£¼ëŠ” ë³€ìˆ˜
 local On = false
 local Bottom = false
 
---ÀÓ½Ã·Î ÇÃ·¹ÀÌ¾î ÀÌ¸§À» Àû´Â º¯¼ö
+--ì„ì‹œë¡œ í”Œë ˆì´ì–´ ì´ë¦„ì„ ì ëŠ” ë³€ìˆ˜
 local TemporaryPlr = script.Parent.Parent.TemporaryPlr
 
---Á¶°ÇÀÌ ¼º¸³ µÆ´ÂÁö ¾Ë·ÁÁÖ´Â º¯¼ö
+--ì¡°ê±´ì´ ì„±ë¦½ ëëŠ”ì§€ ì•Œë ¤ì£¼ëŠ” ë³€ìˆ˜
 local TempPerfect = false
 local SpeedPerfect = false
 local CollectNum = 0
 
---¹İº¹¹®À» ¸ØÃß°Ô ÇÏ´Â º¯¼ö
+--ë°˜ë³µë¬¸ì„ ë©ˆì¶”ê²Œ í•˜ëŠ” ë³€ìˆ˜
 local StopStop = false
 
 
---Á¶°ÇÀÌ ¼º¸³ µÅ°í °¡¿­±³¹İ±â°¡ ÀÛµ¿ µÇ´Â °úÁ¤À» º¸¿© ÁÙ ¶§ ´Ù¸¥ »óÈ£ÀÛ¿ëÀ» ¸øÇÏ°Ô ¸·¾ÆÁÖ´Â º¯¼ö
+--ì¡°ê±´ì´ ì„±ë¦½ ë¼ê³  ê°€ì—´êµë°˜ê¸°ê°€ ì‘ë™ ë˜ëŠ” ê³¼ì •ì„ ë³´ì—¬ ì¤„ ë•Œ ë‹¤ë¥¸ ìƒí˜¸ì‘ìš©ì„ ëª»í•˜ê²Œ ë§‰ì•„ì£¼ëŠ” ë³€ìˆ˜
 local ing = false
 
---¿¡³ÊÁö°¡ ÇöÀç ¾î´ÀÁ¤µµ ÀÎÁö °ªÀ» °¡Á®¿À´Â ¸®¸ğÆ®
+--ì—ë„ˆì§€ê°€ í˜„ì¬ ì–´ëŠì •ë„ ì¸ì§€ ê°’ì„ ê°€ì ¸ì˜¤ëŠ” ë¦¬ëª¨íŠ¸
 local MoneyEnergy1 = game.ReplicatedStorage.Energy.MoneyEnergy1
 local MoneyEnergy2 = game.ReplicatedStorage.Energy.MoneyEnergy2
 local MoneyEnergy3 = game.ReplicatedStorage.Energy.MoneyEnergy3
 
---ÇÃ·¹ÀÌ¾î, ¸¶ÄÏÇÃ·¹ÀÌ½º¼­ºñ½º¸¦ °¡Á®¿Í ÁÖ´Â ÄÚµå
+--í”Œë ˆì´ì–´, ë§ˆì¼“í”Œë ˆì´ìŠ¤ì„œë¹„ìŠ¤ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ì½”ë“œ
 local Players = game:GetService("Players")
 local gamepass = game:GetService("MarketplaceService")
 
---ÇöÀç ¿¬±¸Á÷ÀÇ ·¹º§, Á÷±ŞÀ» °¡Á®¿Í ÁÖ´Â ¸®¸ğÆ®
+--í˜„ì¬ ì—°êµ¬ì§ì˜ ë ˆë²¨, ì§ê¸‰ì„ ê°€ì ¸ì™€ ì£¼ëŠ” ë¦¬ëª¨íŠ¸
 local ResearchData = game.ReplicatedStorage.State.ResearchData
 
---È¿°ú¸¦ °¡Á®¿Í ÁÖ´Â ¸®¸ğÆ®
+--íš¨ê³¼ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë¦¬ëª¨íŠ¸
 local MoneyEffect = game.ReplicatedStorage.Effect.Money
 local LevelEffect = game.ReplicatedStorage.Effect.LevelUp
 local EnergyValue = 1
 local programData = 1
 
 
---¿¡³ÊÁö ºñÀ²ÀÌ ÇöÀç ¾î´À »óÅÂÀÎÁö¿¡ µû¶ó ¼öÀÍÀÌ º¯ÇÏ°Ô ¸¸µå´Â ÄÚµå
+--ì—ë„ˆì§€ ë¹„ìœ¨ì´ í˜„ì¬ ì–´ëŠ ìƒíƒœì¸ì§€ì— ë”°ë¼ ìˆ˜ìµì´ ë³€í•˜ê²Œ ë§Œë“œëŠ” ì½”ë“œ
 MoneyEnergy1.OnServerEvent:Connect(function(player)
 	EnergyValue = 1
 end)
@@ -96,63 +96,63 @@ MoneyEnergy3.OnServerEvent:Connect(function(player)
 	EnergyValue = 0.3
 end)
 
---µ· °è»ê ÄÚµå
+--ëˆ ê³„ì‚° ì½”ë“œ
 function Moneydef(player, MoneyValue, M)
 
-	--¿¬±¸Á÷ ·¹º§ µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö
+	--ì—°êµ¬ì§ ë ˆë²¨ ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜
 	local level = DataManagerModule:GetData(player).ResearchLevel
 	
-	--´ÙÀ½ ·¹º§ ±îÁö ¸î ·¹º§Æ÷ÀÎÆ® ½×¿´´ÂÁö µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö
+	--ë‹¤ìŒ ë ˆë²¨ ê¹Œì§€ ëª‡ ë ˆë²¨í¬ì¸íŠ¸ ìŒ“ì˜€ëŠ”ì§€ ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜
 	local DataP = DataManagerModule:GetData(player).ProgResearchLevel
 	
-	--È¯»ıÀ» ¸î ¹ø Çß´ÂÁö µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö (È¯»ı ½Ã½ºÅÛÀº ÇöÀç »ç¿ëÇÏÁö ¾ÊÀ½)
+	--í™˜ìƒì„ ëª‡ ë²ˆ í–ˆëŠ”ì§€ ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜ (í™˜ìƒ ì‹œìŠ¤í…œì€ í˜„ì¬ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
 	local Reset = DataManagerModule:GetData(player).reset
 	
-	--·¹º§¿¡ µû¶ó ¼öÀÍÀ» ¾ó¸¸Å­ °öÇØ¾ß ÇÏ´ÂÁö¸¦  °¡Á®¿À´Â º¯¼ö
+	--ë ˆë²¨ì— ë”°ë¼ ìˆ˜ìµì„ ì–¼ë§Œí¼ ê³±í•´ì•¼ í•˜ëŠ”ì§€ë¥¼  ê°€ì ¸ì˜¤ëŠ” ë³€ìˆ˜
 	local Ratio = DataManagerModule:GetData(player).ResearchLevelRatio
 	
-	--´ÙÀ½ ¿¬±¸Á÷ ·¹º§ ±îÁö ¸î ·¹º§Æ÷ÀÎÆ®¸¦ ¸ğ¾Æ¾ß ÇÏ´ÂÁö ¾Ë·ÁÁÖ´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö
+	--ë‹¤ìŒ ì—°êµ¬ì§ ë ˆë²¨ ê¹Œì§€ ëª‡ ë ˆë²¨í¬ì¸íŠ¸ë¥¼ ëª¨ì•„ì•¼ í•˜ëŠ”ì§€ ì•Œë ¤ì£¼ëŠ” ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜
 	local limit = DataManagerModule:GetData(player).ResearchLevelLimit
 	
-	--°è±ŞÀÌ ¾î´À Á¤µµ ÀÎÁö ¾Ë·ÁÁÖ´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö (°è±Ş ½Ã½ºÅÛÀº ÇöÀç »ç¿ëÇÏÁö ¾ÊÀ½)
+	--ê³„ê¸‰ì´ ì–´ëŠ ì •ë„ ì¸ì§€ ì•Œë ¤ì£¼ëŠ” ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜ (ê³„ê¸‰ ì‹œìŠ¤í…œì€ í˜„ì¬ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
 	local Department = DataManagerModule:GetData(player).ResearchDepartment
 	
-	--Á÷±ŞÀÌ ¾î´ÀÁ¤µµ ÀÎÁö ¾Ë·ÁÁÖ´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö
+	--ì§ê¸‰ì´ ì–´ëŠì •ë„ ì¸ì§€ ì•Œë ¤ì£¼ëŠ” ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜
 	local Rank = DataManagerModule:GetData(player).ResearchRank
 	
-	--°è±Ş¿¡ µû¶ó ¼öÀÍÀ» ¾ó¸¸Å­ °öÇØ¾ß ÇÏ´ÂÁö¸¦ °¡Á®¿À´Â º¯¼ö (°è±Ş ½Ã½ºÅÛÀº ÇöÀç »ç¿ëÇÏÁö ¾ÊÀ½)
+	--ê³„ê¸‰ì— ë”°ë¼ ìˆ˜ìµì„ ì–¼ë§Œí¼ ê³±í•´ì•¼ í•˜ëŠ”ì§€ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë³€ìˆ˜ (ê³„ê¸‰ ì‹œìŠ¤í…œì€ í˜„ì¬ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
 	local DepartmentValue = DataManagerModule:GetData(player).ResearchDepartmentValue
 	
-	--Á÷±Ş¿¡ µû¶ó ¼öÀÍÀ» ¾ó¸¸Å­ °öÇØ¾ß ÇÏ´ÂÁö¸¦ °¡Á®¿À´Â º¯¼ö
+	--ì§ê¸‰ì— ë”°ë¼ ìˆ˜ìµì„ ì–¼ë§Œí¼ ê³±í•´ì•¼ í•˜ëŠ”ì§€ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë³€ìˆ˜
 	local RankValue = DataManagerModule:GetData(player).ResearchRankValue
 	
-	--´ÙÀ½ Á÷±Ş ±îÁö ¸î ·¹º§À» ¸ğ¾Æ¾ß ÇÏ´ÂÁö ¾Ë·ÁÁÖ´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö
+	--ë‹¤ìŒ ì§ê¸‰ ê¹Œì§€ ëª‡ ë ˆë²¨ì„ ëª¨ì•„ì•¼ í•˜ëŠ”ì§€ ì•Œë ¤ì£¼ëŠ” ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜
 	local RankLimit = DataManagerModule:GetData(player).ResearchRankLimit
 	
-	--´ÙÀ½ °è±Ş ±îÁö ¾î´ÀÁ¤µµÀÇ Á÷±ŞÀÌ µÇ¾ß ÇÏ´ÂÁö ¾Ë·ÁÁÖ´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ÁÖ´Â º¯¼ö (°è±Ş ½Ã½ºÅÛÀº ÇöÀç »ç¿ëÇÏÁö ¾ÊÀ½)
+	--ë‹¤ìŒ ê³„ê¸‰ ê¹Œì§€ ì–´ëŠì •ë„ì˜ ì§ê¸‰ì´ ë˜ì•¼ í•˜ëŠ”ì§€ ì•Œë ¤ì£¼ëŠ” ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì£¼ëŠ” ë³€ìˆ˜ (ê³„ê¸‰ ì‹œìŠ¤í…œì€ í˜„ì¬ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
 	local DepartmentLimit = DataManagerModule:GetData(player).ResearchDepartmentLimit
 
 
-	--¼öÀÍ ÀÓ½Ã ±â·Ï
+	--ìˆ˜ìµ ì„ì‹œ ê¸°ë¡
 	local MoneyMemo
 	
-	--¸®´õº¸µå¿¡¼­ µ·ÀÌ ¾î´ÀÁ¤µµ ÀÎÁö¸¦ °¡Á®¿È
+	--ë¦¬ë”ë³´ë“œì—ì„œ ëˆì´ ì–´ëŠì •ë„ ì¸ì§€ë¥¼ ê°€ì ¸ì˜´
 	local MoneyValue = player.leaderstats.Money
 	
-	--°ÔÀÓÆĞ½º°¡ ÀÖÀ¸¸é ¼öÀÍÀÌ 2¹è, °ÔÀÓÆĞ½º°¡ ¾øÀ¸¸é ¼öÀÍÀÌ ±×´ë·Î
+	--ê²Œì„íŒ¨ìŠ¤ê°€ ìˆìœ¼ë©´ ìˆ˜ìµì´ 2ë°°, ê²Œì„íŒ¨ìŠ¤ê°€ ì—†ìœ¼ë©´ ìˆ˜ìµì´ ê·¸ëŒ€ë¡œ
 	if not gamepass:UserOwnsGamePassAsync(player.UserId, 107025607) then
-		--°ÔÀÓÆĞ½º ¾øÀ» ¶§ µ· °è»ê ¹æ¹ı (È¯»ı ¼öÀÍ ¹èÀ² * ( °è±Ş ¼öÀÍ ¹èÀ² * ( Á÷±Ş ¼öÀÍ ¹èÀ² * ( ·¹º§ ¼öÀÍ ¹èÀ² * ( ±âº» ¼öÀÍ * °¡¿­±³¹İ±â¿¡¼­ ³ª¿À´Â º¸³Ê½º) ) ) ) ) 
+		--ê²Œì„íŒ¨ìŠ¤ ì—†ì„ ë•Œ ëˆ ê³„ì‚° ë°©ë²• (í™˜ìƒ ìˆ˜ìµ ë°°ìœ¨ * ( ê³„ê¸‰ ìˆ˜ìµ ë°°ìœ¨ * ( ì§ê¸‰ ìˆ˜ìµ ë°°ìœ¨ * ( ë ˆë²¨ ìˆ˜ìµ ë°°ìœ¨ * ( ê¸°ë³¸ ìˆ˜ìµ * ê°€ì—´êµë°˜ê¸°ì—ì„œ ë‚˜ì˜¤ëŠ” ë³´ë„ˆìŠ¤) ) ) ) ) 
 		MoneyMemo = EnergyValue * (Reset * (DepartmentValue * (RankValue * (Ratio * ((M * programData))))))
-		MoneyValue.Value += EnergyValue * (Reset * (DepartmentValue * (RankValue * (Ratio * ((M * programData)))))) --¾òÀº µ·À» ±âÁ¸ µ·¿¡ ´õÇØÁÜ
+		MoneyValue.Value += EnergyValue * (Reset * (DepartmentValue * (RankValue * (Ratio * ((M * programData)))))) --ì–»ì€ ëˆì„ ê¸°ì¡´ ëˆì— ë”í•´ì¤Œ
 		DataManagerModule:UpdateData(player, "ProgResearchLevel", DataP + (1 * programData))
 	elseif gamepass:UserOwnsGamePassAsync(player.UserId, 107025607) then
-		--°ÔÀÓÆĞ½º ÀÖÀ» ¶§ µ· °è»ê ¹æ¹ı (2 * (È¯»ı ¼öÀÍ ¹èÀ² * ( °è±Ş ¼öÀÍ ¹èÀ² * ( Á÷±Ş ¼öÀÍ ¹èÀ² * ( ·¹º§ ¼öÀÍ ¹èÀ² * ( ±âº» ¼öÀÍ * °¡¿­±³¹İ±â¿¡¼­ ³ª¿À´Â º¸³Ê½º) ) ) )  )
+		--ê²Œì„íŒ¨ìŠ¤ ìˆì„ ë•Œ ëˆ ê³„ì‚° ë°©ë²• (2 * (í™˜ìƒ ìˆ˜ìµ ë°°ìœ¨ * ( ê³„ê¸‰ ìˆ˜ìµ ë°°ìœ¨ * ( ì§ê¸‰ ìˆ˜ìµ ë°°ìœ¨ * ( ë ˆë²¨ ìˆ˜ìµ ë°°ìœ¨ * ( ê¸°ë³¸ ìˆ˜ìµ * ê°€ì—´êµë°˜ê¸°ì—ì„œ ë‚˜ì˜¤ëŠ” ë³´ë„ˆìŠ¤) ) ) )  )
 		MoneyMemo =  EnergyValue * (2 * (Reset * (DepartmentValue * (RankValue * (Ratio * ((M * programData)))))))
-		MoneyValue.Value += EnergyValue * (2 * (Reset * (DepartmentValue * (RankValue * (Ratio * ((M * programData))))))) --¾òÀº µ·À» ±âÁ¸ µ·¿¡ ´õÇØÁÜ
+		MoneyValue.Value += EnergyValue * (2 * (Reset * (DepartmentValue * (RankValue * (Ratio * ((M * programData))))))) --ì–»ì€ ëˆì„ ê¸°ì¡´ ëˆì— ë”í•´ì¤Œ
 		DataManagerModule:UpdateData(player, "ProgResearchLevel", DataP + (2 * programData))
 	end
 	
-	--·¹º§Æ÷ÀÎÆ®°¡ ´ÙÀ½ Æ¯Á¤ ·¹º§Æ÷ÀÎÆ®¿¡ µµ´ŞÇØ¾ß ÇÏ´Â ±âÁØÀ» °°°Å³ª ³ÑÀ¸¸é ·¹º§Æ÷ÀÎÆ®¸¦ 0À¸·Î ¸¸µé°í ·¹º§À» ¿Ã¸®´Â ÄÚµå
+	--ë ˆë²¨í¬ì¸íŠ¸ê°€ ë‹¤ìŒ íŠ¹ì • ë ˆë²¨í¬ì¸íŠ¸ì— ë„ë‹¬í•´ì•¼ í•˜ëŠ” ê¸°ì¤€ì„ ê°™ê±°ë‚˜ ë„˜ìœ¼ë©´ ë ˆë²¨í¬ì¸íŠ¸ë¥¼ 0ìœ¼ë¡œ ë§Œë“¤ê³  ë ˆë²¨ì„ ì˜¬ë¦¬ëŠ” ì½”ë“œ
 	if DataManagerModule:GetData(player).ProgResearchLevel >= limit then
 		DataManagerModule:UpdateData(player, "ResearchLevel", level + 1)
 		DataManagerModule:UpdateData(player, "ResearchLevelRatio", Ratio + 0.1)
@@ -161,14 +161,14 @@ function Moneydef(player, MoneyValue, M)
 		local LevelMemo = DataManagerModule:GetData(player).ResearchLevel
 		LevelEffect:FireClient(player, LevelMemo)
 	end
-	--·¹º§ÀÌ ´ÙÀ½ Æ¯Á¤ ·¹º§¿¡ µµ´ŞÇØ¾ß ÇÏ´Â ±âÁØÀ» °°°Å³ª ³ÑÀ¸¸é Á÷±ŞÀ» ¿Ã¸®´Â ÄÚµå
+	--ë ˆë²¨ì´ ë‹¤ìŒ íŠ¹ì • ë ˆë²¨ì— ë„ë‹¬í•´ì•¼ í•˜ëŠ” ê¸°ì¤€ì„ ê°™ê±°ë‚˜ ë„˜ìœ¼ë©´ ì§ê¸‰ì„ ì˜¬ë¦¬ëŠ” ì½”ë“œ
 	if DataManagerModule:GetData(player).ResearchLevel >= RankLimit then
 		DataManagerModule:UpdateData(player, "ResearchRank", Rank + 1)
 		DataManagerModule:UpdateData(player, "ResearchRankValue", RankValue + 0.5)
 		DataManagerModule:UpdateData(player, "ResearchRankLimit", RankLimit + 5)
 		local RankMemo = DataManagerModule:GetData(player).ResearchRank
 	end
-	--Á÷±ŞÀÌ ´ÙÀ½ Æ¯Á¤ Á÷±Ş¿¡ µµ´ŞÇØ¾ß ÇÏ´Â ±âÁØÀ» °°°Å³ª ³ÑÀ¸¸é °è±ŞÀ» ¿Ã¸®´Â ÄÚµå (ÇöÀç´Â ¾È¾¸)
+	--ì§ê¸‰ì´ ë‹¤ìŒ íŠ¹ì • ì§ê¸‰ì— ë„ë‹¬í•´ì•¼ í•˜ëŠ” ê¸°ì¤€ì„ ê°™ê±°ë‚˜ ë„˜ìœ¼ë©´ ê³„ê¸‰ì„ ì˜¬ë¦¬ëŠ” ì½”ë“œ (í˜„ì¬ëŠ” ì•ˆì”€)
 	if DataManagerModule:GetData(player).ResearchRank >= DepartmentLimit then
 		DataManagerModule:UpdateData(player, "ResearchRank", 1)
 		DataManagerModule:UpdateData(player, "ResearchRankValue", 1)
@@ -176,7 +176,7 @@ function Moneydef(player, MoneyValue, M)
 		DataManagerModule:UpdateData(player, "ResearchDepartmentValue", DepartmentValue + 2)
 		local DepartmentMemo = DataManagerModule:GetData(player).ResearchDepartment
 	end
-	--»óÅÂÃ¢¿¡ Ç¥½ÃÇÏ±â À§ÇØ À§¿¡¼­ ¾÷µ¥ÀÌÆ® µÈ µ¥ÀÌÅÍ¸¦ ´Ù½Ã °¡Á®¿À´Â º¯¼ö
+	--ìƒíƒœì°½ì— í‘œì‹œí•˜ê¸° ìœ„í•´ ìœ„ì—ì„œ ì—…ë°ì´íŠ¸ ëœ ë°ì´í„°ë¥¼ ë‹¤ì‹œ ê°€ì ¸ì˜¤ëŠ” ë³€ìˆ˜
 	local DataPR = DataManagerModule:GetData(player).ProgResearchLevel
 	local levelR = DataManagerModule:GetData(player).ResearchLevel
 	local limitSS = DataManagerModule:GetData(player).ResearchLevelLimit
@@ -184,19 +184,19 @@ function Moneydef(player, MoneyValue, M)
 	local RankS = DataManagerModule:GetData(player).ResearchRank
 	local RankLimitS = DataManagerModule:GetData(player).ResearchRankLimit
 	
-	--·¹º§Æ÷ÀÎÆ® / ·¹º§Æ÷ÀÎÆ® ±âÁØÁ¡
+	--ë ˆë²¨í¬ì¸íŠ¸ / ë ˆë²¨í¬ì¸íŠ¸ ê¸°ì¤€ì 
 	local limitS = "/"..limitSS
 	
-	--»óÅÂÃ¢¿¡ Á¤º¸¸¦ Ç¥½ÃÇÏ±â À§ÇØ ¼­¹ö¿¡¼­ ·ÎÄÃ·Î ¸®¸ğÆ®¸¦ º¸³¿
+	--ìƒíƒœì°½ì— ì •ë³´ë¥¼ í‘œì‹œí•˜ê¸° ìœ„í•´ ì„œë²„ì—ì„œ ë¡œì»¬ë¡œ ë¦¬ëª¨íŠ¸ë¥¼ ë³´ëƒ„
 	ResearchData:FireClient(player, levelR, DataPR, limitS, DepartmentS, RankS, RankLimitS)
 	
-	--¸¸¾à¿¡ ¼öÀÍÀÌ 0À» ÃÊ°úÇÏ¸é µ·À» ¾òÀº È¿°ú¸¦ Ç¥½Ã ÇØÁÜ
+	--ë§Œì•½ì— ìˆ˜ìµì´ 0ì„ ì´ˆê³¼í•˜ë©´ ëˆì„ ì–»ì€ íš¨ê³¼ë¥¼ í‘œì‹œ í•´ì¤Œ
 	if MoneyMemo > 0 then
 		MoneyEffect:FireClient(player, MoneyMemo)
 	end
 end
 
---°¡¿­±³¹İ±â È°¼ºÈ­ ½ÃÅ³ ¶§ ÇÃ·¹ÀÌ¾îÀÇ ÀÌ¸§°ú ³²Àº ½Ã°£À» ¿ÜºÎ·Î Ç¥½ÃÇÏ°í Å¬¶óÀÌ¾ğÆ®ÀÇ UI¿¡ °¡¿­±³¹İ±â µ¹¸®´Â Á¶°ÇÀÌ ³ª¿À°Ô ¼­¹ö¿¡¼­ Å¬¶óÀÌ¾ğÆ®·Î Á¶°ÇÀ» º¸³»´Â ¸®¸ğÆ®°¡ ÀÖ´Â ÇÔ¼ö
+--ê°€ì—´êµë°˜ê¸° í™œì„±í™” ì‹œí‚¬ ë•Œ í”Œë ˆì´ì–´ì˜ ì´ë¦„ê³¼ ë‚¨ì€ ì‹œê°„ì„ ì™¸ë¶€ë¡œ í‘œì‹œí•˜ê³  í´ë¼ì´ì–¸íŠ¸ì˜ UIì— ê°€ì—´êµë°˜ê¸° ëŒë¦¬ëŠ” ì¡°ê±´ì´ ë‚˜ì˜¤ê²Œ ì„œë²„ì—ì„œ í´ë¼ì´ì–¸íŠ¸ë¡œ ì¡°ê±´ì„ ë³´ë‚´ëŠ” ë¦¬ëª¨íŠ¸ê°€ ìˆëŠ” í•¨ìˆ˜
 function Chemicals(plr, TimeTimeValue, ChemicalsName, Plus, TempTempValue, SpeedSpeedValue)
 	NameSIGN.Text = plr.Name
 	TimeSIGN.Text = tostring(TimeTimeValue)
@@ -205,23 +205,23 @@ end
 
 
 Prox.Triggered:Connect(function(plr)
-	--OnÀÌ false ÀÏ ¶§ °¡¿­±³¹İ±â ½ÇÇà 
+	--Onì´ false ì¼ ë•Œ ê°€ì—´êµë°˜ê¸° ì‹¤í–‰ 
 	if On == false then
 		ButtonClick:Play()
-		TemporaryPlr.Value = plr.Name --¾ÕÀ¸·Î ³ª¿Ã Á¶°Ç¹®¿¡ ÇÊ¿äÇÏ±â ¶§¹®¿¡ ÀÓ½Ã ÇÃ·¹ÀÌ¾î ÀÌ¸§ Ãß°¡
+		TemporaryPlr.Value = plr.Name --ì•ìœ¼ë¡œ ë‚˜ì˜¬ ì¡°ê±´ë¬¸ì— í•„ìš”í•˜ê¸° ë•Œë¬¸ì— ì„ì‹œ í”Œë ˆì´ì–´ ì´ë¦„ ì¶”ê°€
 		ReactionFormulaCheck:FireClient(plr)
 	end
 	if On == true then
-		--OnÀÌ true ÀÏ ¶§ È­ÇĞ¹°À» ³ÖÀ¸¸é »ı±â´Â ÀÌº¥Æ®
+		--Onì´ true ì¼ ë•Œ í™”í•™ë¬¼ì„ ë„£ìœ¼ë©´ ìƒê¸°ëŠ” ì´ë²¤íŠ¸
 		if plr.Name == NameSIGN.Text then
 			if CollectNum  ~= 2 then
-			--ÇÃ·¹ÀÌ¾î°¡ µé°í ÀÖ´Â È­ÇĞ¹°ÀÌ Á¶°Ç¿¡ ÀÖ´Â È­ÇĞ¹°ÀÎÁö ±¸ºĞ
+			--í”Œë ˆì´ì–´ê°€ ë“¤ê³  ìˆëŠ” í™”í•™ë¬¼ì´ ì¡°ê±´ì— ìˆëŠ” í™”í•™ë¬¼ì¸ì§€ êµ¬ë¶„
 			local plrcharacterOne = plr.Character:FindFirstChild(OneValue)
 			local plrcharacterTwo = plr.Character:FindFirstChild(TwoValue)
 			if plrcharacterOne then
 				plrcharacterOne:Destroy()
 				
-				--È­ÇĞ¹°À» µÎ ¹øÂ°·Î Ã¤¿ï ¶§
+				--í™”í•™ë¬¼ì„ ë‘ ë²ˆì§¸ë¡œ ì±„ìš¸ ë•Œ
 				if Bottom == true then
 					TopBeaker.Color = OneColor
 					TopBeaker.Transparency = 0.5
@@ -241,7 +241,7 @@ Prox.Triggered:Connect(function(plr)
 					end
 				end
 				
-				--È­ÇĞ¹°À» Ã¹ ¹øÂ°·Î Ã¤¿ï ¶§
+				--í™”í•™ë¬¼ì„ ì²« ë²ˆì§¸ë¡œ ì±„ìš¸ ë•Œ
 				if Bottom == false then
 					LiquidSound:Play()
 					Bottom = true
@@ -266,7 +266,7 @@ Prox.Triggered:Connect(function(plr)
 			if plrcharacterTwo then
 				plrcharacterTwo:Destroy()
 				
-				--È­ÇĞ¹°À» µÎ ¹øÂ°·Î Ã¤¿ï ¶§
+				--í™”í•™ë¬¼ì„ ë‘ ë²ˆì§¸ë¡œ ì±„ìš¸ ë•Œ
 				if Bottom == true then
 					LiquidSound:Play()
 					TopBeaker.Color = TwoColor
@@ -287,7 +287,7 @@ Prox.Triggered:Connect(function(plr)
 					end
 				end
 				
-				--È­ÇĞ¹°À» Ã¹ ¹øÂ°·Î Ã¤¿ï ¶§
+				--í™”í•™ë¬¼ì„ ì²« ë²ˆì§¸ë¡œ ì±„ìš¸ ë•Œ
 				if Bottom == false then
 					LiquidSound:Play()
 					Bottom = true
@@ -314,7 +314,7 @@ Prox.Triggered:Connect(function(plr)
 end)
 
 
---ºñÄ¿¿¡ ÀÖ´ø È­ÇĞ¹°µéÀ» ¹ö¸®´Â ¹öÆ° ÄÚµå
+--ë¹„ì»¤ì— ìˆë˜ í™”í•™ë¬¼ë“¤ì„ ë²„ë¦¬ëŠ” ë²„íŠ¼ ì½”ë“œ
 LiquidDestory.MouseClick:Connect(function(plr)
 	if ing == false then
 		if plr.Name == NameSIGN.Text then
@@ -327,20 +327,20 @@ LiquidDestory.MouseClick:Connect(function(plr)
 	end
 end)
 
---¿Âµµ ¹öÆ°À» Å¬¸¯ÇÏ¸é ¿Âµµ°¡ ¿Ã¶ó°¡´Â ÄÚµå
+--ì˜¨ë„ ë²„íŠ¼ì„ í´ë¦­í•˜ë©´ ì˜¨ë„ê°€ ì˜¬ë¼ê°€ëŠ” ì½”ë“œ
 TempButton.MouseClick:Connect(function(player)
 	if On == true then
 		if player.Name == NameSIGN.Text then
 			ButtonClick:Play()
 			TempValue.Value = TempValue.Value + 1
 			
-			--¸¸¾à TempValue º¯¼ö°¡ 8À» ÃÊ°úÇÏ¸é ´Ù½Ã 1·Î ¸¸µë
+			--ë§Œì•½ TempValue ë³€ìˆ˜ê°€ 8ì„ ì´ˆê³¼í•˜ë©´ ë‹¤ì‹œ 1ë¡œ ë§Œë“¬
 			if TempValue.Value > 8 then
 				TempValue.Value = 1
 			end
 	
 			TempSwitch.CFrame = TempSwitch.CFrame * CFrame.Angles(math.rad(-45),0,0)
-			--¸¸¾à TempValue º¯¼ö°¡ ·£´ıÀ¸·Î ÁöÁ¤ÇÑ ¿Âµµ º¯¼ö¶û °°¾ÆÁö¸é »ı±â´Â ÀÌº¥Æ®
+			--ë§Œì•½ TempValue ë³€ìˆ˜ê°€ ëœë¤ìœ¼ë¡œ ì§€ì •í•œ ì˜¨ë„ ë³€ìˆ˜ë‘ ê°™ì•„ì§€ë©´ ìƒê¸°ëŠ” ì´ë²¤íŠ¸
 			if TempValue.Value == TempTempValue then
 				TempPerfect = true
 				if CollectNum == 2 then
@@ -355,7 +355,7 @@ TempButton.MouseClick:Connect(function(player)
 						end
 					end
 				end
-				--¸¸¾à TempPerfect°¡ trueÀÌ°í SpeedPerfect°¡ falseÀÎ »óÅÂ¿¡¼­ ¿Âµµ ¹öÆ°À» Å¬¸¯ Çß´Ù¸é TempPerfect¸¦ false·Î ¸¸µé¾î¼­ °¡¿­±³¹İ±â µ¹¸®´Â Á¶°Ç Áß ÇÏ³ªÀÎ TempPerfect º¯¼ö °ªÀ» °ÅÁşÀ¸·Î ¸¸µë
+				--ë§Œì•½ TempPerfectê°€ trueì´ê³  SpeedPerfectê°€ falseì¸ ìƒíƒœì—ì„œ ì˜¨ë„ ë²„íŠ¼ì„ í´ë¦­ í–ˆë‹¤ë©´ TempPerfectë¥¼ falseë¡œ ë§Œë“¤ì–´ì„œ ê°€ì—´êµë°˜ê¸° ëŒë¦¬ëŠ” ì¡°ê±´ ì¤‘ í•˜ë‚˜ì¸ TempPerfect ë³€ìˆ˜ ê°’ì„ ê±°ì§“ìœ¼ë¡œ ë§Œë“¬
 			elseif TempValue.Value ~= TempTempValue then
 				TempPerfect = false
 			end
@@ -363,20 +363,20 @@ TempButton.MouseClick:Connect(function(player)
 	end
 end)
 
---¼Óµµ ¹öÆ°À» Å¬¸¯ÇÏ¸é ¼Óµµ°¡ ¿Ã¶ó°¡´Â ÄÚµå
+--ì†ë„ ë²„íŠ¼ì„ í´ë¦­í•˜ë©´ ì†ë„ê°€ ì˜¬ë¼ê°€ëŠ” ì½”ë“œ
 SpeedButton.MouseClick:Connect(function(player)
 	if On == true then
 		if player.Name == NameSIGN.Text then
 			ButtonClick:Play()
 			SpeedValue.Value = SpeedValue.Value + 1
 			
-			--¸¸¾à SpeedValue º¯¼ö°¡ 8À» ÃÊ°úÇÏ¸é ´Ù½Ã 1·Î ¸¸µë
+			--ë§Œì•½ SpeedValue ë³€ìˆ˜ê°€ 8ì„ ì´ˆê³¼í•˜ë©´ ë‹¤ì‹œ 1ë¡œ ë§Œë“¬
 			if SpeedValue.Value > 8 then
 				SpeedValue.Value = 1
 			end
 			
 			SpeedSwitch.CFrame = SpeedSwitch.CFrame * CFrame.Angles(math.rad(-45),0,0)
-			--¸¸¾à TempValue º¯¼ö°¡ ·£´ıÀ¸·Î ÁöÁ¤ÇÑ ¿Âµµ º¯¼ö¶û °°¾ÆÁö¸é »ı±â´Â ÀÌº¥Æ®
+			--ë§Œì•½ TempValue ë³€ìˆ˜ê°€ ëœë¤ìœ¼ë¡œ ì§€ì •í•œ ì˜¨ë„ ë³€ìˆ˜ë‘ ê°™ì•„ì§€ë©´ ìƒê¸°ëŠ” ì´ë²¤íŠ¸
 			if SpeedValue.Value == SpeedSpeedValue then
 				SpeedPerfect = true
 				if CollectNum == 2 then
@@ -391,7 +391,7 @@ SpeedButton.MouseClick:Connect(function(player)
 						end
 					end
 				end
-				--¸¸¾à SpeedPerfect°¡ trueÀÌ°í TempPerfect°¡ falseÀÎ »óÅÂ¿¡¼­ ¼Óµµ ¹öÆ°À» Å¬¸¯ Çß´Ù¸é SpeedPerfect¸¦ false·Î ¸¸µé¾î¼­ °¡¿­±³¹İ±â µ¹¸®´Â Á¶°Ç Áß ÇÏ³ªÀÎ TempPerfect º¯¼ö °ªÀ» °ÅÁşÀ¸·Î ¸¸µë
+				--ë§Œì•½ SpeedPerfectê°€ trueì´ê³  TempPerfectê°€ falseì¸ ìƒíƒœì—ì„œ ì†ë„ ë²„íŠ¼ì„ í´ë¦­ í–ˆë‹¤ë©´ SpeedPerfectë¥¼ falseë¡œ ë§Œë“¤ì–´ì„œ ê°€ì—´êµë°˜ê¸° ëŒë¦¬ëŠ” ì¡°ê±´ ì¤‘ í•˜ë‚˜ì¸ TempPerfect ë³€ìˆ˜ ê°’ì„ ê±°ì§“ìœ¼ë¡œ ë§Œë“¬
 			elseif SpeedValue.Value ~= SpeedSpeedValue then
 				SpeedPerfect = false
 			end
@@ -400,13 +400,13 @@ SpeedButton.MouseClick:Connect(function(player)
 end)
 
 
---°¡¿­±³¹İ±â¸¦ µ¹¸®´Â Á¶°ÇÀ» »ı¼ºÇÏ´Â 
+--ê°€ì—´êµë°˜ê¸°ë¥¼ ëŒë¦¬ëŠ” ì¡°ê±´ì„ ìƒì„±í•˜ëŠ” 
 ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 	if plr.Name == TemporaryPlr.Value then
-		--¸¸¾à ÀÌ¹Ì ´Ù¸¥ °¡¿­±³¹İ±â¸¦ µ¹¸®°í ÀÖÀ» ½Ã ÀÌ °¡¿­±³¹İ±â´Â ¸ø µ¹¸®°Ô ¸·´Â Á¶°Ç¹®
+		--ë§Œì•½ ì´ë¯¸ ë‹¤ë¥¸ ê°€ì—´êµë°˜ê¸°ë¥¼ ëŒë¦¬ê³  ìˆì„ ì‹œ ì´ ê°€ì—´êµë°˜ê¸°ëŠ” ëª» ëŒë¦¬ê²Œ ë§‰ëŠ” ì¡°ê±´ë¬¸
 		if n == "Off" then
 			On = true
-			TemporaryPlr.Value = "" --ÀÓ½Ã ÇÃ·¹ÀÌ¾î ÀÌ¸§ Á¦°Å
+			TemporaryPlr.Value = "" --ì„ì‹œ í”Œë ˆì´ì–´ ì´ë¦„ ì œê±°
 			Prox.ActionText = "Put"
 			TimeTimeValue = math.random(30,50)
 			NaemNameValue = math.random(1,17)
@@ -414,125 +414,125 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 			SpeedSpeedValue = math.random(1,8)
 			if NaemNameValue == 1 then
 				OneValue = "CO"
-				TwoValue = "2H©ü"
-				Chemicals(plr, TimeTimeValue, "¸ŞÅº¿ï", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "2Hâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ë©”íƒ„ìš¸", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(213, 0, 4)
+				TwoColor = Color3.fromRGB(0, 17, 255)
 			end
 			if NaemNameValue == 2 then
-				OneValue = "2H©ü"
-				TwoValue = "O©ü"
-				Chemicals(plr, TimeTimeValue, "¹°", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				OneValue = "2Hâ‚‚"
+				TwoValue = "Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ë¬¼", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(129, 213, 213)
+				TwoColor = Color3.fromRGB(207, 255, 94)
 			end
 			if NaemNameValue == 3 then
-				OneValue = "N©ü"
-				TwoValue = "3H©ü"
-				Chemicals(plr, TimeTimeValue, "¾Ï¸ğ´Ï¾Æ", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				OneValue = "Nâ‚‚"
+				TwoValue = "3Hâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì•”ëª¨ë‹ˆì•„", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(189, 213, 34)
+				TwoColor = Color3.fromRGB(255, 225, 245)
 			end
 			if NaemNameValue == 4 then
-				OneValue = "H©ü"
-				TwoValue = "Cl©ü"
-				Chemicals(plr, TimeTimeValue, "¿°È­¼ö¼Ò", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				OneValue = "Hâ‚‚"
+				TwoValue = "Clâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì—¼í™”ìˆ˜ì†Œ", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(213, 108, 56)
+				TwoColor = Color3.fromRGB(255, 251, 131)
 			end
 			if NaemNameValue == 5 then
-				OneValue = "H©ü"
-				TwoValue = "F©ü"
-				Chemicals(plr, TimeTimeValue, "ºÒÈ­¼ö¼Ò", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				OneValue = "Hâ‚‚"
+				TwoValue = "Fâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ë¶ˆí™”ìˆ˜ì†Œ", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(213, 117, 191)
+				TwoColor = Color3.fromRGB(255, 105, 105)
 			end
 			if NaemNameValue == 6 then
 				OneValue = "2Na"
-				TwoValue = "Cl©ü"
-				Chemicals(plr, TimeTimeValue, "¿°È­³ªÆ®·ı", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "Clâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì—¼í™”ë‚˜íŠ¸ë¥¨", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(185, 213, 132)
+				TwoColor = Color3.fromRGB(66, 255, 186)
 			end
 			if NaemNameValue == 7 then
 				OneValue = "2Mg"
-				TwoValue = "O©ü"
-				Chemicals(plr, TimeTimeValue, "»êÈ­¸¶±×³×½·", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚°í™”ë§ˆê·¸ë„¤ìŠ˜", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(213, 169, 192)
+				TwoColor = Color3.fromRGB(255, 144, 144)
 			end
 			if NaemNameValue == 8 then
 				OneValue = "4Al"
-				TwoValue = "3O©ü"
-				Chemicals(plr, TimeTimeValue, "»êÈ­¾Ë·ç¹Ì´½", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "3Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚°í™”ì•Œë£¨ë¯¸ëŠ„", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(155, 213, 134)
+				TwoColor = Color3.fromRGB(151, 255, 215)
 			end
 			if NaemNameValue == 9 then
 				OneValue = "Si"
-				TwoValue = "O©ü"
-				Chemicals(plr, TimeTimeValue, "ÀÌ»êÈ­±Ô¼Ò", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì´ì‚°í™”ê·œì†Œ", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(184, 39, 213)
+				TwoColor = Color3.fromRGB(255, 14, 14)
 			end
 			if NaemNameValue == 10 then
-				OneValue = "P©ş"
-				TwoValue = "6Cl©ü"
-				Chemicals(plr, TimeTimeValue, "»ï¿°È­ÀÎ", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				OneValue = "Pâ‚„"
+				TwoValue = "6Clâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚¼ì—¼í™”ì¸", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(155, 21, 213)
+				TwoColor = Color3.fromRGB(88, 110, 255)
 			end
 			if NaemNameValue == 11 then
 				OneValue = "S"
-				TwoValue = "3F©ü"
-				Chemicals(plr, TimeTimeValue, "À°ºÒÈ­È²", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				TwoValue = "3Fâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ìœ¡ë¶ˆí™”í™©", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
 				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoColor = Color3.fromRGB(129, 255, 12)
 			end
 			if NaemNameValue == 12 then
 				OneValue = "B"
-				TwoValue = "3F©ü"
-				Chemicals(plr, TimeTimeValue, "»ïºÒÈ­ºØ¼Ò", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "3Fâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚¼ë¶ˆí™”ë¶•ì†Œ", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(211, 164, 213)
+				TwoColor = Color3.fromRGB(255, 169, 49)
 			end
 			if NaemNameValue == 13 then
 				OneValue = "2K"
-				TwoValue = "Cl©ü"
-				Chemicals(plr, TimeTimeValue, "¿°È­Ä®·ı", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "Clâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì—¼í™”ì¹¼ë¥¨", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(116, 213, 198)
+				TwoColor = Color3.fromRGB(255, 64, 64)
 			end
 			if NaemNameValue == 14 then
 				OneValue = "2Ca"
-				TwoValue = "O©ü"
-				Chemicals(plr, TimeTimeValue, "»êÈ­Ä®½·", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚°í™”ì¹¼ìŠ˜", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(94, 213, 38)
+				TwoColor = Color3.fromRGB(255, 248, 46)
 			end
 			if NaemNameValue == 15 then
 				OneValue = "2Zn"
-				TwoValue = "O©ü"
-				Chemicals(plr, TimeTimeValue, "»êÈ­¾Æ¿¬", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚°í™”ì•„ì—°", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(139, 153, 213)
+				TwoColor = Color3.fromRGB(231, 255, 199)
 			end
 			if NaemNameValue == 16 then
 				OneValue = "2Cu"
-				TwoValue = "O©ü"
-				Chemicals(plr, TimeTimeValue, "»êÈ­±¸¸®(II)", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚°í™”êµ¬ë¦¬(II)", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(157, 25, 213)
+				TwoColor = Color3.fromRGB(255, 201, 140)
 			end
 			if NaemNameValue == 17 then
 				OneValue = "Mn"
-				TwoValue = "2O©ü"
-				Chemicals(plr, TimeTimeValue, "»êÈ­¸Á°£(IV)", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
-				OneColor = Color3.fromRGB(213, 213, 213)
-				TwoColor = Color3.fromRGB(255, 255, 255)
+				TwoValue = "2Oâ‚‚"
+				Chemicals(plr, TimeTimeValue, "ì‚°í™”ë§ê°„(IV)", OneValue.." + "..TwoValue, TempTempValue, SpeedSpeedValue)
+				OneColor = Color3.fromRGB(213, 165, 207)
+				TwoColor = Color3.fromRGB(255, 172, 7)
 			end
 			
-			--¸¸¾à¿¡ Ã³À½ºÎÅÍ ·£´ı °ªÀÌ¶û ±âÁ¸ °ªÀÌ¶û °°À» ¶§ TempPerfect È¤Àº SpeedPerfect¸¦ true·Î ¸¸µë
+			--ë§Œì•½ì— ì²˜ìŒë¶€í„° ëœë¤ ê°’ì´ë‘ ê¸°ì¡´ ê°’ì´ë‘ ê°™ì„ ë•Œ TempPerfect í˜¹ì€ SpeedPerfectë¥¼ trueë¡œ ë§Œë“¬
 				if TempValue.Value == TempTempValue then
 					TempPerfect = true
 				end
@@ -540,13 +540,13 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 					SpeedPerfect = true
 				end
 				
-				--Å¸ÀÌ¸Ó
+				--íƒ€ì´ë¨¸
 				for i = TimeTimeValue, 0, -1 do
 					TimeSIGN.Text = tostring(i)
 					
-					--¸¸¾à¿¡ Á¶°ÇÀÌ ¼º¸³ µÅ¼­ StopStopÀÌ true°¡ µÅ¸é ¹İº¹¹®À» Áß´Ü ½ÃÅ´
+					--ë§Œì•½ì— ì¡°ê±´ì´ ì„±ë¦½ ë¼ì„œ StopStopì´ trueê°€ ë¼ë©´ ë°˜ë³µë¬¸ì„ ì¤‘ë‹¨ ì‹œí‚´
 					if StopStop == true then
-						--ÀÛµ¿ °úÁ¤ ¹× º¸»ó ÄÚµå
+						--ì‘ë™ ê³¼ì • ë° ë³´ìƒ ì½”ë“œ
 						StopStop = false
 						ing = true
 						Prox.Enabled = false
@@ -562,7 +562,7 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 						Moneydef(plr, MoneyValue, 500)
 						game.ReplicatedStorage.Tutorial.ResearchRemote:FireClient(plr, "Heating")
 						
-						--ÀüÃ¼ °ª ÃÊ±âÈ­
+						--ì „ì²´ ê°’ ì´ˆê¸°í™”
 						BottomBeaker.Transparency = 1
 						TopBeaker.Transparency = 1
 						NameSIGN.Text = ""
@@ -579,9 +579,9 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 						On = false
 						break
 					end
-					--¸¸¾à¿¡ ½Ã°£ÀÌ ÃÊ°ú µÆÀ» ¶§ ÀÏ¾î³ª´Â ÄÚµå
+					--ë§Œì•½ì— ì‹œê°„ì´ ì´ˆê³¼ ëì„ ë•Œ ì¼ì–´ë‚˜ëŠ” ì½”ë“œ
 					if i == 0 then
-						--ÃÊ±âÈ­
+						--ì´ˆê¸°í™”
 						Prox.Enabled = true
 						Prox.ActionText = "Start"
 						BottomBeaker.Transparency = 1
@@ -603,7 +603,7 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 					task.wait(1)
 				end
 		elseif n == "On" then
-			TemporaryPlr.Value = "" --¸¸¾à ´Ù¸¥ °¡¿­±³¹İ±â¸¦ µ¹¸®°í ÀÖ¾ú´Ù¸é ÀÓ½Ã ÇÃ·¹ÀÌ¾î ÀÌ¸§À» Áö¿ì±â
+			TemporaryPlr.Value = "" --ë§Œì•½ ë‹¤ë¥¸ ê°€ì—´êµë°˜ê¸°ë¥¼ ëŒë¦¬ê³  ìˆì—ˆë‹¤ë©´ ì„ì‹œ í”Œë ˆì´ì–´ ì´ë¦„ì„ ì§€ìš°ê¸°
 		end
 	end
 end)
