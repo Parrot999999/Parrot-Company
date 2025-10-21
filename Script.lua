@@ -32,12 +32,12 @@ local ReactionFormulaRemote = game.ReplicatedStorage.Research.ReactionFormulaRem
 local ReactionFormulaCheck = game.ReplicatedStorage.Research.ReactionFormulaCheck
 local ReactionFormulaStop = game.ReplicatedStorage.Research.ReactionFormulaStop
 
---가열교반기 소리 오브젝트 변수
+--가열교반기 소리 변수
 local HeatingStirrerSound = script.Parent.LiquidDestory.HeatingStirrerSound
 local ButtonClick = script.Parent.LiquidDestory.ButtonClick
 local LiquidSound = script.Parent.LiquidDestory.LiquidSound
 
---임시로 쓰이는 랜덤 관련 변수들
+--랜덤 변수
 local TimeTimeValue
 local NaemNameValue
 local OneValue
@@ -48,7 +48,6 @@ local TempTempValue
 local SpeedSpeedValue
 
 --화학물이 어느정도 찼는지 알려주는 변수
-local On = false
 local Bottom = false
 
 --임시로 플레이어 이름을 적는 변수
@@ -62,17 +61,20 @@ local CollectNum = 0
 --반복문을 멈추게 하는 변수
 local StopStop = false
 
+--가열교반기 활성화 상태
+local On = false
 
---조건이 성립 돼고 가열교반기가 작동 되는 과정을 보여 줄 때 다른 상호작용을 못하게 막아주는 변수
+
+--가열교반기 작동 중 다른 상호작용을 막는 변수
 local ing = false
 
---에너지가 현재 어느정도 인지 값을 가져오는 리모트
+
+--에너지 상태 관련 리모트
 local MoneyEnergy1 = game.ReplicatedStorage.Energy.MoneyEnergy1
 local MoneyEnergy2 = game.ReplicatedStorage.Energy.MoneyEnergy2
 local MoneyEnergy3 = game.ReplicatedStorage.Energy.MoneyEnergy3
 
---플레이어, 마켓플레이스서비스를 가져와 주는 코드
-local Players = game:GetService("Players")
+--마켓플레이스서비스 서비스를 가져와 주는 코드
 local gamepass = game:GetService("MarketplaceService")
 
 --현재 연구직의 레벨, 직급을 가져와 주는 리모트
@@ -81,7 +83,9 @@ local ResearchData = game.ReplicatedStorage.State.ResearchData
 --효과를 가져와 주는 리모트
 local MoneyEffect = game.ReplicatedStorage.Effect.Money
 local LevelEffect = game.ReplicatedStorage.Effect.LevelUp
+--에너지가 어느정도인지 따라 수익에 영향을 주는 변수
 local EnergyValue = 1
+--가열교반기로 사
 local programData = 1
 
 
@@ -133,7 +137,7 @@ function Moneydef(player, MoneyValue, M)
 	local DepartmentLimit = DataManagerModule:GetData(player).ResearchDepartmentLimit
 
 
-	--수익 임시 기록
+	--수익 임시 기록 (얼마를 벌었는지을 클라이언트 UI에 보여주기 위해 이 변수에 기록 함)
 	local MoneyMemo
 	
 	--리더보드에서 돈이 어느정도 인지를 가져옴
@@ -196,7 +200,9 @@ function Moneydef(player, MoneyValue, M)
 	end
 end
 
---가열교반기 활성화 시킬 때 플레이어의 이름과 남은 시간을 외부로 표시하고 클라이언트의 UI에 가열교반기 돌리는 조건이 나오게 서버에서 클라이언트로 조건을 보내는 리모트가 있는 함수
+--함수 Chemicals는 플레이어가 가열교반기를 활성화했을 때 호출됨
+--플레이어의 이름과 남은 시간을 외부에 보여줌
+--화학물을 만들 때 필요한 화학 반응 조건들(화학물, 온도, 속도)을 클라이언트로 전달해서 표시 시켜 줌
 function Chemicals(plr, TimeTimeValue, ChemicalsName, Plus, TempTempValue, SpeedSpeedValue)
 	NameSIGN.Text = plr.Name
 	TimeSIGN.Text = tostring(TimeTimeValue)
@@ -205,7 +211,7 @@ end
 
 
 Prox.Triggered:Connect(function(plr)
-	--On이 false 일 때 가열교반기 실행 
+	--On이 false 일 때 가열교반기 일 때 다른 가열교반기를 사용하고 있는지 확인하기 위해 클라이언트에 신호를 보냄
 	if On == false then
 		ButtonClick:Play()
 		TemporaryPlr.Value = plr.Name --앞으로 나올 조건문에 필요하기 때문에 임시 플레이어 이름 추가
@@ -218,6 +224,8 @@ Prox.Triggered:Connect(function(plr)
 			--플레이어가 들고 있는 화학물이 조건에 있는 화학물인지 구분
 			local plrcharacterOne = plr.Character:FindFirstChild(OneValue)
 			local plrcharacterTwo = plr.Character:FindFirstChild(TwoValue)
+				--plrcharacterOne이랑 plrcharacterTwo랑 나눈 이유 : 각 화학물마다 넣었을 때 나오는 색깔이 다르기 때문에 구분 할 필요가 있음
+			
 			if plrcharacterOne then
 				plrcharacterOne:Destroy()
 				
@@ -327,7 +335,7 @@ LiquidDestory.MouseClick:Connect(function(plr)
 	end
 end)
 
---온도 버튼을 클릭하면 온도가 올라가는 코드
+--온도 버튼을 클릭 이벤트
 TempButton.MouseClick:Connect(function(player)
 	if On == true then
 		if player.Name == NameSIGN.Text then
@@ -363,7 +371,7 @@ TempButton.MouseClick:Connect(function(player)
 	end
 end)
 
---속도 버튼을 클릭하면 속도가 올라가는 코드
+--속도 버튼을 클릭 이벤트
 SpeedButton.MouseClick:Connect(function(player)
 	if On == true then
 		if player.Name == NameSIGN.Text then
@@ -400,14 +408,18 @@ SpeedButton.MouseClick:Connect(function(player)
 end)
 
 
---가열교반기를 돌리는 조건을 생성하는 
+--가열교반기 돌리는 조건을 설정하고, 조건이 성립되면 수익을 계산하고 준 후 코드를 초기화
 ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
-	if plr.Name == TemporaryPlr.Value then
+	--n은 다른 가열교반기가 활성화 되어 있는지를 알려주는 변수
+	if plr.Name == TemporaryPlr.Value then --신호를 받았을 때 자신의 가열교반기에서만 활성화 될 수 있도록 만든 조건문
 		--만약 이미 다른 가열교반기를 돌리고 있을 시 이 가열교반기는 못 돌리게 막는 조건문
 		if n == "Off" then
 			On = true
 			TemporaryPlr.Value = "" --임시 플레이어 이름 제거
 			Prox.ActionText = "Put"
+			
+			--화학물 만드는 조건을 만드는 변수
+			--랜덤으로 값을 돌려서 매번 다른 조건이 나오게 만듦
 			TimeTimeValue = math.random(30,50)
 			NaemNameValue = math.random(1,17)
 			TempTempValue = math.random(1,8)
@@ -532,7 +544,7 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 				TwoColor = Color3.fromRGB(255, 172, 7)
 			end
 			
-			--만약에 처음부터 랜덤 값이랑 기존 값이랑 같을 때 TempPerfect 혹은 SpeedPerfect를 true로 만듬
+			--만약에 처음부터 TempValue.Value 또는 SpeedValue.Value 값이랑 기존 값이랑 같을 때 TempPerfect 혹은 SpeedPerfect를 true로 만듬
 				if TempValue.Value == TempTempValue then
 					TempPerfect = true
 				end
@@ -542,7 +554,7 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 				
 				--타이머
 				for i = TimeTimeValue, 0, -1 do
-					TimeSIGN.Text = tostring(i)
+					TimeSIGN.Text = tostring(i) --반복 될 때마다 외부에 현재 남은 시간을 알려줌
 					
 					--만약에 조건이 성립 돼서 StopStop이 true가 돼면 반복문을 중단 시킴
 					if StopStop == true then
@@ -600,6 +612,7 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 						On = false
 						break
 					end
+					--만약 위의 조건들이 안일어 난다면 1초를 기달림
 					task.wait(1)
 				end
 		elseif n == "On" then
