@@ -424,6 +424,8 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 			NaemNameValue = math.random(1,17)
 			TempTempValue = math.random(1,8)
 			SpeedSpeedValue = math.random(1,8)
+
+			--NameNameValue 값에 따라 생성할 화학물의 이름, 필요한 화학물들, 그리고 각 화학물의 색상을 결정함
 			if NaemNameValue == 1 then
 				OneValue = "CO"
 				TwoValue = "2H₂"
@@ -544,10 +546,12 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 				TwoColor = Color3.fromRGB(255, 172, 7)
 			end
 			
-			--만약에 처음부터 TempValue.Value 또는 SpeedValue.Value 값과 기존 값이 같다면, TempPerfect 혹은 SpeedPerfect를 true로 만듦
+				--만약 처음부터 TempValue.Value(가열교반기의 현재 온도 다이얼 값)가 TempTempValue.Value와 같다면, 온도 조건이 성립된 것으로 간주하여 TempPerfect 변수를 true로 설정함
 				if TempValue.Value == TempTempValue then
 					TempPerfect = true
 				end
+
+				--만약 처음부터 SpeedValue.Value(가열교반기의 현재 속도 다이얼 값)가 SpeedSpeedValue.Value와 같다면, 속도 조건이 성립된 것으로 간주하여 SpeedPerfect 변수를 true로 설정함
 				if SpeedValue.Value == SpeedSpeedValue then
 					SpeedPerfect = true
 				end
@@ -621,3 +625,4 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 		end
 	end
 end)
+
