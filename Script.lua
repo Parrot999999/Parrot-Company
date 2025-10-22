@@ -335,7 +335,7 @@ LiquidDestory.MouseClick:Connect(function(plr)
 	end
 end)
 
---온도 버튼을 클릭 이벤트
+--온도 다이얼 버튼을 클릭 했을 때 실행되는 이벤트
 TempButton.MouseClick:Connect(function(player)
 	if On == true then
 		if player.Name == NameSIGN.Text then
@@ -371,7 +371,7 @@ TempButton.MouseClick:Connect(function(player)
 	end
 end)
 
---속도 버튼을 클릭 이벤트
+--속도 다이 버튼을 클릭 했을 때 실행되는 이벤트
 SpeedButton.MouseClick:Connect(function(player)
 	if On == true then
 		if player.Name == NameSIGN.Text then
@@ -412,7 +412,7 @@ end)
 ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 	--n은 다른 가열교반기가 활성화 되어 있는지를 알려주는 변수
 	if plr.Name == TemporaryPlr.Value then --신호를 받았을 때 자신의 가열교반기에서만 활성화 될 수 있도록 만든 조건문
-		--만약 이미 다른 가열교반기를 돌리고 있을 시 이 가열교반기는 못 돌리게 막는 조건문
+		--만약 이미 다른 가열교반기를 활성화 했다면 이 가열교반기는 활성화 못하게 막는 조건문
 		if n == "Off" then
 			On = true
 			TemporaryPlr.Value = "" --임시 플레이어 이름 제거
@@ -544,7 +544,7 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 				TwoColor = Color3.fromRGB(255, 172, 7)
 			end
 			
-			--만약에 처음부터 TempValue.Value 또는 SpeedValue.Value 값이랑 기존 값이랑 같을 때 TempPerfect 혹은 SpeedPerfect를 true로 만듬
+			--만약에 처음부터 TempValue.Value 또는 SpeedValue.Value 값과 기존 값이 같다면, TempPerfect 혹은 SpeedPerfect를 true로 만듦
 				if TempValue.Value == TempTempValue then
 					TempPerfect = true
 				end
@@ -553,10 +553,11 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 				end
 				
 				--타이머
+				--for 반복문에 i에는 위에서 나온 TimeTimeValue의 값을 넣음
 				for i = TimeTimeValue, 0, -1 do
 					TimeSIGN.Text = tostring(i) --반복 될 때마다 외부에 현재 남은 시간을 알려줌
 					
-					--만약에 조건이 성립 돼서 StopStop이 true가 돼면 반복문을 중단 시킴
+					--만약 조건이 성립 되어 StopStop이 true가 된다면, 반복문을 중단시킴
 					if StopStop == true then
 						--작동 과정 및 보상 코드
 						StopStop = false
@@ -591,7 +592,7 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 						On = false
 						break
 					end
-					--만약에 시간이 초과 됐을 때 일어나는 코드
+					--만약 시간이 초과된 경우, 실행되는 코드
 					if i == 0 then
 						--초기화
 						Prox.Enabled = true
@@ -612,11 +613,12 @@ ReactionFormulaCheck.OnServerEvent:Connect(function(plr, n)
 						On = false
 						break
 					end
-					--만약 위의 조건들이 안일어 난다면 1초를 기달림
+					--만약 위의 조건들이 성립되지 않는다면, 1초를 기다림
 					task.wait(1)
 				end
 		elseif n == "On" then
-			TemporaryPlr.Value = "" --만약 다른 가열교반기를 돌리고 있었다면 임시 플레이어 이름을 지우기
+			TemporaryPlr.Value = "" --만약 다른 가열교반기를 돌리고 있었다면 임시 플레이어 이름을 지움
 		end
 	end
 end)
+
