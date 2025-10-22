@@ -1,14 +1,14 @@
---°¡¿­±³¹İ±â ·ÎÄÃ ½ºÅ©¸³Æ®
+--ê°€ì—´êµë°˜ê¸° ë¡œì»¬ ìŠ¤í¬ë¦½íŠ¸
 
---¸®¸ğÆ® º¯¼ö
+--ë¦¬ëª¨íŠ¸ ë³€ìˆ˜
 local ReactionFormulaRemote = game.ReplicatedStorage.Research.ReactionFormulaRemote
 local ReactionFormulaCheck = game.ReplicatedStorage.Research.ReactionFormulaCheck
 local ReactionFormulaStop = game.ReplicatedStorage.Research.ReactionFormulaStop
 
---¹İº¹¹®À» ¸ØÃß°Ô ÇÏ´Â º¯¼ö
+--ë°˜ë³µë¬¸ì„ ë©ˆì¶”ê²Œ í•˜ëŠ” ë³€ìˆ˜
 local Stop = false
 
---UI °ü·Ã ¿ÀºêÁ§Æ®¸¦ Àû¾îµĞ º¯¼ö
+--UI ê´€ë ¨ ì˜¤ë¸Œì íŠ¸ë¥¼ ì ì–´ë‘” ë³€ìˆ˜
 local NameT = script.Parent.Frame.NameT
 local ReactionFormulaT = script.Parent.Frame.ReactionFormulaT
 local TimeT = script.Parent.Frame.TimeT
@@ -16,11 +16,11 @@ local Frame = script.Parent.Frame
 local TempImage = script.Parent.Frame.TempImage
 local SpeedImage = script.Parent.Frame.SpeedImage
 
---ÀÌ¹Ì °¡¿­±³¹İ±â¸¦ µ¹¸®°í ÀÖ´ÂÁö Àû´Â bool º¯¼ö
+--ê°€ì—´êµí™˜ê¸°ë¥¼ ì‘ë™í•˜ê³  ìˆëŠ”ì§€ ì—¬ë¶€ë¥¼ ë°˜í™˜í•˜ëŠ” bool ë³€ìˆ˜
 local On = false
 
 
---°¡¿­±³¹İ±â°¡ ÀÌ¹Ì µ¹¾Æ°¡°í ÀÖ´ÂÁö ¾Æ´ÑÁö¸¦ È®ÀÎÇÑ ´ÙÀ½ ¼­¹ö·Î º¸³»´Â ¿ªÇÒÀ» ÇÏ´Â ÄÚµå
+--ê°€ì—´êµë°˜ê¸°ê°€ ì´ë¯¸ ëŒì•„ê°€ê³  ìˆëŠ”ì§€ ì•„ë‹Œì§€ë¥¼ í™•ì¸í•œ ë‹¤ìŒ ì„œë²„ë¡œ ë³´ë‚´ëŠ” ì—­í• ì„ í•˜ëŠ” ì½”ë“œ
 ReactionFormulaCheck.OnClientEvent:Connect(function()
 	if On == false then
 		ReactionFormulaCheck:FireServer("Off")
@@ -29,19 +29,19 @@ ReactionFormulaCheck.OnClientEvent:Connect(function()
 	end
 end)
 
---¸¸¾à °¡¿­±³¹İ±â°¡ Á¾·á µÆ´Ù¸é Stop º¯¼ö¸¦ true·Î ¸¸µé¾î ¹İº¹¹®À» ¸ØÃß°Ô ÇÑ ÈÄ 8ÃÊ ±â´Ù·Á On º¯¼ö¸¦ false·Î ¸¸µå´Â ÄÚµå
+--ë§Œì•½ ê°€ì—´êµë°˜ê¸°ê°€ ì¢…ë£Œ ëë‹¤ë©´ Stop ë³€ìˆ˜ë¥¼ trueë¡œ ë§Œë“¤ì–´ ë°˜ë³µë¬¸ì„ ë©ˆì¶”ê²Œ í•œ í›„ 8ì´ˆ ê¸°ë‹¤ë ¤ On ë³€ìˆ˜ë¥¼ falseë¡œ ë§Œë“œëŠ” ì½”ë“œ
 ReactionFormulaStop.OnClientEvent:Connect(function()
 	Stop = true
 	task.wait(8)
 	On = false
 end)
 
---¼­¹ö¿¡¼­ ¹Ş¾Æ¿î ·£´ı °ªÀ» Ui¿¡ Àû¿ë ½ÃÅ°´Â ÄÚµå
+--ì„œë²„ì—ì„œ ë°›ì•„ìš´ ëœë¤ ê°’ì„ Uiì— ì ìš© ì‹œí‚¤ëŠ” ì½”ë“œ
 ReactionFormulaRemote.OnClientEvent:Connect(function(TimeV, NameV, ReactionFormulaV, TempV, SpeedV)
 	On = true
 	task.wait(0.3)
 	local TimeVV
-	NameT.Text = NameV.."(À»)/¸¦ ¸¸µå´Â ¹æ¹ı"
+	NameT.Text = NameV.."(ì„)/ë¥¼ ë§Œë“œëŠ” ë°©ë²•"
 	ReactionFormulaT.Text = ReactionFormulaV
 	TimeVV = TimeV
 	if TempV == 1 then
@@ -96,9 +96,9 @@ ReactionFormulaRemote.OnClientEvent:Connect(function(TimeV, NameV, ReactionFormu
 	
 	Frame.Visible = true
 	
-	--Å¸ÀÌ¸Ó
+	--íƒ€ì´ë¨¸
 	repeat
-		--¸¸¾à Stop º¯¼ö°¡ true°¡ µÇ¸é ¹İº¹¹®À» ¸ØÃã
+		--ë§Œì•½ Stop ë³€ìˆ˜ê°€ trueê°€ ë˜ë©´ ë°˜ë³µë¬¸ì„ ë©ˆì¶¤
 		if Stop == true then
 			Stop = false
 			Frame.Visible = false
@@ -109,17 +109,18 @@ ReactionFormulaRemote.OnClientEvent:Connect(function(TimeV, NameV, ReactionFormu
 		end
 		TimeVV = TimeVV - 1
 		task.wait(1)
-		TimeT.Text = tostring(TimeVV).."ÃÊ ³²À½"
+		TimeT.Text = tostring(TimeVV).."ì´ˆ ë‚¨ìŒ"
 	until TimeVV == 0
 	
-	--¸¸¾à ½Ã°£ÀÌ ÃÊ°úµÆ´Ù¸é OnÀ» false·Î ¸¸µé¾î ÃÊ±âÈ­
+	--ë§Œì•½ ì‹œê°„ì´ ì´ˆê³¼ëë‹¤ë©´ Onì„ falseë¡œ ë§Œë“¤ì–´ ì´ˆê¸°í™”
 	if TimeVV == 0 then
 		On = false
 	end
-	--°ª ÃÊ±âÈ­
+	--ê°’ ì´ˆê¸°í™”
 	Frame.Visible = false
 	NameT.Text = ""
 	ReactionFormulaT.Text = ""
 	TimeT.Text = ""
 	
+
 end)
